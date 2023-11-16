@@ -1,4 +1,5 @@
-﻿using Business.Concrete;
+﻿using System.ComponentModel.Design;
+using Business.Concrete;
 using DataAccess.Concrete.EntityFramework;
 using DataAccess.Concrete.InMemory;
 
@@ -33,7 +34,21 @@ CategoryManager categoryManager = new CategoryManager(new EfCategoryDal());
 //var category = categoryManager.GetById(1);
 //Console.WriteLine(category.CategoryId + " " + category.CategoryName);
 
-foreach (var product in productManager.GetProductDetails())
+//foreach (var product in productManager.GetProductDetails().Data)
+//{
+//	Console.WriteLine(product.ProductName + " ||| " + product.CategoryName);
+//}
+
+var result = productManager.GetProductDetails();
+
+if (result.IsSuccess == true)
 {
-	Console.WriteLine(product.ProductName + " ||| " + product.CategoryName);
+	foreach (var product in result.Data)
+	{
+		Console.WriteLine(product.ProductName + " ||| " + product.CategoryName);
+	}
+}
+else
+{
+    Console.WriteLine(result.Message);
 }
