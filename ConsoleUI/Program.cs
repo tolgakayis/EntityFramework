@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.Design;
+using Business.Abstract;
 using Business.Concrete;
 using DataAccess.Concrete.EntityFramework;
 using DataAccess.Concrete.InMemory;
@@ -8,7 +9,7 @@ using DataAccess.Concrete.InMemory;
 // Open Closed Principle
 // Data Transformation Object
 
-ProductManager productManager = new ProductManager(new EfProductDal());
+ProductManager productManager = new ProductManager(new EfProductDal(), new CategoryManager(new EfCategoryDal()));
 CategoryManager categoryManager = new CategoryManager(new EfCategoryDal());
 
 //foreach (var product in productManager.GetAll())
